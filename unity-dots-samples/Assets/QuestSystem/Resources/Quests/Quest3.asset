@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e94faecc9523904b9106514c78166d7, type: 3}
+  m_Name: Quest3
+  m_EditorClassIdentifier: 
+  ID: 12
+  Goals:
+  - Location: {fileID: 11400000, guid: e96b0869b01e75e4b8003e9bafdfbeb6, type: 2}
+    Type: {fileID: 11400000, guid: f509b3d6ef956b04d8c07f3af037e9d6, type: 2}
+    Count: 5
+  - Location: {fileID: 11400000, guid: e96b0869b01e75e4b8003e9bafdfbeb6, type: 2}
+    Type: {fileID: 11400000, guid: 27850a4d63d91d44bb7f8e777eb012d4, type: 2}
+    Count: 5
