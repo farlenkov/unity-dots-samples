@@ -8,4 +8,5 @@ public class LocationTemplate : MonoBehaviour
     public Text LocationNameText;
     public Button MonsterButtonTemplate;
     public Button ItemButtonTemplate;
+    public Button TalkButtonTemplate;
 }

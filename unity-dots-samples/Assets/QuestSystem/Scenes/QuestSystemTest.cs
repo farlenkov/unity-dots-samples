@@ -24,6 +24,7 @@ namespace QuestSystem
             var locations = Resources.LoadAll<LocationInfo>("Locations");
             var monsters = Resources.LoadAll<MonsterInfo>("Monsters");
             var items = Resources.LoadAll<ItemInfo>("Items");
+            var events = Resources.LoadAll<SpecialEventInfo>("SpecialEvents");
 
             foreach (var location in locations)
             {
@@ -36,6 +37,9 @@ namespace QuestSystem
 
                 foreach (var item in items)
                     CreateButton(location_el.ItemButtonTemplate, location, item, "Pickup ");
+
+                foreach (var evnt in events)
+                    CreateButton(location_el.TalkButtonTemplate, location, evnt, string.Empty);
             }
         }
         void CreateButton(Button template, LocationInfo location, GoalTypeInfo info, string text)
