@@ -1,1 +1,1 @@
-# unity-dots-samples
+# Basic samples for Unity ECS.
