@@ -22,18 +22,7 @@ namespace QuestSystem
         void CheckQuestCompletion(Entity quest_entity)
         {
             var counters = EntityManager.GetBuffer<QuestCounterElement>(quest_entity);
-            var is_complete = true;
-
-            for (var i = 0; i < counters.Length; i++)
-            {
-                var counter = counters[i];
-
-                if (counter.TargetCount != counter.CurrentCount)
-                {
-                    is_complete = false;
-                    break;
-                }
-            }
+            var is_complete = counters.IsCompleted();
 
             PostUpdateCommands.RemoveComponent<QuestChangeEvent>(quest_entity);
 

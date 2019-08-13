@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 namespace QuestSystem
@@ -9,6 +10,8 @@ namespace QuestSystem
     public class QuestInfo : BaseInfo
     {
         public GoalInfo[] Goals;
+
+        
 
         [Serializable]
         public class GoalInfo

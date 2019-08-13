@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +8,27 @@ namespace QuestSystem
 {
     public class QuestSystemTest : MonoBehaviour
     {
-        public LocationTemplate LocationTemplate;
+        public GameObject LocationTemplate;
+        public GameObject QuestTemplate;
+
         public Transform LocationsRoot;
+        public Transform QuestRoot;
+
+        public Color ActiveQuestColor;
+        public Color CompletedQuestColor;
+
+        Dictionary<int, Text> QuestTrackers = new Dictionary<int, Text>();
+        Dictionary<int, Entity> QuestEntities = new Dictionary<int, Entity>();
+        Dictionary<int, BaseInfo> Info = new Dictionary<int, BaseInfo>();
+
+        EntityManager Manager => World.Active.EntityManager;
+        public static Action<int> QuestUpdated;
 
         void Start()
         {
             BuildUI();
             LoadQuests();
+            QuestUpdated = OnQuestUpdated;
         }
 
         void BuildUI()
@@ -28,7 +40,7 @@ namespace QuestSystem
 
             foreach (var location in locations)
             {
-                var location_go = Instantiate(LocationTemplate.gameObject, LocationsRoot);
+                var location_go = Instantiate(LocationTemplate, LocationsRoot);
                 var location_el = location_go.GetComponent<LocationTemplate>();
                 location_el.LocationNameText.text = location.name;
 
@@ -42,6 +54,7 @@ namespace QuestSystem
                     CreateButton(location_el.TalkButtonTemplate, location, evnt, string.Empty);
             }
         }
+
         void CreateButton(Button template, LocationInfo location, GoalTypeInfo info, string text)
         {
             var btn_go = Instantiate(template.gameObject, template.transform.parent);
@@ -83,6 +96,11 @@ namespace QuestSystem
 
                 if (quest.Goals.Length > 0)
                     AddQuestCounters(quest, quest_entity, world.EntityManager);
+
+                Info.Add(quest.ID, quest);
+                QuestEntities.Add(quest.ID, quest_entity);
+                AddQuestTracker(quest);
+                UpdateQuestTracker(quest.ID);
             }
         }
 
@@ -100,6 +118,39 @@ namespace QuestSystem
                     CurrentCount = 0
                 });
             }
+        }
+
+        void AddQuestTracker(QuestInfo quest)
+        {
+            var quest_go = Instantiate(QuestTemplate, QuestRoot);
+            var quest_text = quest_go.GetComponent<Text>();
+            QuestTrackers.Add(quest.ID, quest_text);
+        }
+
+        void UpdateQuestTracker(int id)
+        {
+            var info = Info[id];
+            var tracker = QuestTrackers[id];
+            var entity = QuestEntities[id];
+
+            tracker.text = info.name;
+
+            if (!Manager.HasComponent<QuestCounterElement>(entity))
+                return;
+
+            var counters = Manager.GetBuffer<QuestCounterElement>(entity);
+            tracker.color = counters.IsCompleted() ? CompletedQuestColor : ActiveQuestColor;
+
+            for (var i=0;i< counters.Length;i++)
+            {
+                var counter = counters[i];
+                tracker.text += string.Format(" {0}/{1}", counter.CurrentCount, counter.TargetCount);
+            }
+        }
+
+        void OnQuestUpdated(int id)
+        {
+            UpdateQuestTracker(id);
         }
     }
 }

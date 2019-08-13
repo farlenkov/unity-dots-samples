@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e94faecc9523904b9106514c78166d7, type: 3}
   m_Name: Quest4
   m_EditorClassIdentifier: 
-  ID: 12
+  ID: 13
   Goals:
   - Location: {fileID: 11400000, guid: 98e5248dc30e25c4cbc8a67886b68b44, type: 2}
     Type: {fileID: 11400000, guid: e0f4d85e58fdce341bceb97566ad5045, type: 2}

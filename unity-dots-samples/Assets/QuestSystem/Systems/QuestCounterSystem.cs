@@ -25,11 +25,11 @@ namespace QuestSystem
                     ref QuestActiveTag active) =>
             {
                 if (EntityManager.HasComponent<QuestCounterElement>(quest_entity))
-                    UpdateQuestCounter(quest_entity, ev);
+                    UpdateQuestCounter(quest_entity, quest, ev);
             });
         }
 
-        void UpdateQuestCounter(Entity quest_entity, QuestGoalEvent ev)
+        void UpdateQuestCounter(Entity quest_entity, QuestComponent quest, QuestGoalEvent ev)
         {
             var counters = EntityManager.GetBuffer<QuestCounterElement>(quest_entity);
 
@@ -46,6 +46,9 @@ namespace QuestSystem
 
                     if (!EntityManager.HasComponent<QuestChangeEvent>(quest_entity))
                         PostUpdateCommands.AddComponent<QuestChangeEvent>(quest_entity);
+
+                    // так делать не нужно :)
+                    QuestSystemTest.QuestUpdated(quest.QuestID);
                 }
             }
         }
