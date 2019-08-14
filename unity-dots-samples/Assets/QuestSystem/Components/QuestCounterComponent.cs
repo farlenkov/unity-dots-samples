@@ -9,7 +9,7 @@ namespace QuestSystem
     /// <summary>
     /// счетчик прогрессии квеста
     /// </summary>
-    public struct QuestCounterElement : IBufferElementData
+    public struct QuestCounterComponent : IBufferElementData
     {
         public int TypeID;
         public int LocationID;
@@ -22,7 +22,7 @@ namespace QuestSystem
     /// </summary>
     public static class QuestCounterElementBufferExt
     {
-        public static bool IsCompleted (this DynamicBuffer<QuestCounterElement> counters)
+        public static bool IsCompleted (this DynamicBuffer<QuestCounterComponent> counters)
         {
             var is_complete = true;
 

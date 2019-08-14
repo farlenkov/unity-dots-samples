@@ -106,11 +106,11 @@ namespace QuestSystem
 
         void AddQuestCounters (QuestInfo quest, Entity entity, EntityManager manager)
         {
-            var counter_buffer = manager.AddBuffer<QuestCounterElement>(entity);
+            var counter_buffer = manager.AddBuffer<QuestCounterComponent>(entity);
 
             for (var i = 0; i < quest.Goals.Length; i++)
             {
-                counter_buffer.Add(new QuestCounterElement() {
+                counter_buffer.Add(new QuestCounterComponent() {
 
                     LocationID = quest.Goals[i].Location.ID,
                     TypeID = quest.Goals[i].Type.ID,
@@ -135,10 +135,10 @@ namespace QuestSystem
 
             tracker.text = info.name;
 
-            if (!Manager.HasComponent<QuestCounterElement>(entity))
+            if (!Manager.HasComponent<QuestCounterComponent>(entity))
                 return;
 
-            var counters = Manager.GetBuffer<QuestCounterElement>(entity);
+            var counters = Manager.GetBuffer<QuestCounterComponent>(entity);
             tracker.color = counters.IsCompleted() ? CompletedQuestColor : ActiveQuestColor;
 
             for (var i=0;i< counters.Length;i++)

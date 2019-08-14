@@ -30,14 +30,14 @@ namespace QuestSystem
                 ref QuestComponent quest,
                 ref QuestActiveTag active) =>
             {
-                if (EntityManager.HasComponent<QuestCounterElement>(quest_entity))
+                if (EntityManager.HasComponent<QuestCounterComponent>(quest_entity))
                     UpdateQuestCounter(quest_entity, quest, ev);
             });
         }
 
         void UpdateQuestCounter(Entity quest_entity, QuestComponent quest, GameEvent ev)
         {
-            var counters = EntityManager.GetBuffer<QuestCounterElement>(quest_entity);
+            var counters = EntityManager.GetBuffer<QuestCounterComponent>(quest_entity);
 
             for (var i = 0; i < counters.Length; i++)
             {
