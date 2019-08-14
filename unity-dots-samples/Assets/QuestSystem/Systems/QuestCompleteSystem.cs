@@ -15,6 +15,7 @@ namespace QuestSystem
                     ref QuestActiveTag active,
                     ref QuestChangeEvent change) =>
             {
+                PostUpdateCommands.RemoveComponent<QuestChangeEvent>(quest_entity);
                 CheckQuestCompletion(quest_entity);
             });
         }
@@ -23,8 +24,6 @@ namespace QuestSystem
         {
             var counters = EntityManager.GetBuffer<QuestCounterElement>(quest_entity);
             var is_complete = counters.IsCompleted();
-
-            PostUpdateCommands.RemoveComponent<QuestChangeEvent>(quest_entity);
 
             if (is_complete)
             {
