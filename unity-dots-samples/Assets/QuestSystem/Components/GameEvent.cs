@@ -5,7 +5,10 @@ using UnityEngine;
 
 namespace QuestSystem
 {
-    public struct QuestGoalEvent : IComponentData
+    /// <summary>
+    /// игровое событие
+    /// </summary>
+    public struct GameEvent : IComponentData
     {
         public int TypeID;
         public int LocationID;

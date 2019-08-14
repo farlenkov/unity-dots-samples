@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    /// <summary>
+    /// компонент квеста
+    /// </summary>
     public struct QuestComponent : IComponentData
     {
         public int QuestID;

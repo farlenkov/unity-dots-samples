@@ -68,11 +68,11 @@ namespace QuestSystem
         {
             btn.onClick.AddListener(() => {
 
-                var event_entity = World.Active.EntityManager.CreateEntity(typeof(QuestGoalEvent));
+                var event_entity = World.Active.EntityManager.CreateEntity(typeof(GameEvent));
 
                 World.Active.EntityManager.SetComponentData(
                     event_entity, 
-                    new QuestGoalEvent() {
+                    new GameEvent() {
                         LocationID = location.ID,
                         TypeID = info.ID });
             });

@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    /// <summary>
+    /// событие изменения квеста
+    /// </summary>
     public struct QuestChangeEvent : IComponentData
     {
 

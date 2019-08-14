@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    /// <summary>
+    /// счетчик прогрессии квеста
+    /// </summary>
     public struct QuestCounterElement : IBufferElementData
     {
         public int TypeID;
@@ -14,6 +17,9 @@ namespace QuestSystem
         public int CurrentCount;
     }
 
+    /// <summary>
+    /// вспомогательный метод для проверки завершения квеста
+    /// </summary>
     public static class QuestCounterElementBufferExt
     {
         public static bool IsCompleted (this DynamicBuffer<QuestCounterElement> counters)

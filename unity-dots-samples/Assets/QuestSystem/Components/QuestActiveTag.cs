@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    /// <summary>
+    /// тег активного квеста
+    /// </summary>
     public struct QuestActiveTag : IComponentData
     {
 

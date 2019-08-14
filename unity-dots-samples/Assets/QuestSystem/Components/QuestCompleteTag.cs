@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    /// <summary>
+    /// тег завершенного квеста
+    /// </summary>
     public struct QuestCompleteTag : IComponentData
     {
 

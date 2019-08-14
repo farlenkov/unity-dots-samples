@@ -6,30 +6,36 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    /// <summary>
+    /// Система ловит игровые события и 
+    /// увеличивает счетчики на соответствующих квестах
+    /// </summary>
+    [UpdateBefore(typeof(DestroyGameEventSystem))]
     public class QuestCounterSystem : ComponentSystem
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity event_entity, ref QuestGoalEvent ev) => {
+            Entities.ForEach((
+                Entity event_entity, 
+                ref GameEvent ev) => {
 
                 UpdateQuestCounters(ev);
-                PostUpdateCommands.DestroyEntity(event_entity);
             });
         }
 
-        void UpdateQuestCounters(QuestGoalEvent ev)
+        void UpdateQuestCounters(GameEvent ev)
         {
             Entities.ForEach((
-                    Entity quest_entity,
-                    ref QuestComponent quest,
-                    ref QuestActiveTag active) =>
+                Entity quest_entity,
+                ref QuestComponent quest,
+                ref QuestActiveTag active) =>
             {
                 if (EntityManager.HasComponent<QuestCounterElement>(quest_entity))
                     UpdateQuestCounter(quest_entity, quest, ev);
             });
         }
 
-        void UpdateQuestCounter(Entity quest_entity, QuestComponent quest, QuestGoalEvent ev)
+        void UpdateQuestCounter(Entity quest_entity, QuestComponent quest, GameEvent ev)
         {
             var counters = EntityManager.GetBuffer<QuestCounterElement>(quest_entity);
 
@@ -45,10 +51,7 @@ namespace QuestSystem
                     counters[i] = counter;
 
                     if (!EntityManager.HasComponent<QuestChangeEvent>(quest_entity))
-                        PostUpdateCommands.AddComponent<QuestChangeEvent>(quest_entity);
-
-                    // так делать не нужно :)
-                    QuestSystemTest.QuestUpdated(quest.QuestID);
+                        PostUpdateCommands.AddComponent<QuestChangeEvent>(quest_entity);                    
                 }
             }
         }
