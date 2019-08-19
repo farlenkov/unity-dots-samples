@@ -2,7 +2,7 @@
   "dependencies": {
     "com.unity.entities": "0.1.1-preview",
     "com.unity.ide.vscode": "1.0.7",
-    "com.unity.inputsystem": "0.9.2-preview",
+    "com.unity.inputsystem": "0.9.3-preview",
     "com.unity.package-manager-ui": "2.2.0",
     "com.unity.physics": "0.2.0-preview",
     "com.unity.rendering.hybrid": "0.1.1-preview",
