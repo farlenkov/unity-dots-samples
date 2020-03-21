@@ -21,7 +21,7 @@ namespace QuestSystem
         Dictionary<int, Entity> QuestEntities = new Dictionary<int, Entity>();
         Dictionary<int, BaseInfo> Info = new Dictionary<int, BaseInfo>();
 
-        EntityManager Manager => World.Active.EntityManager;
+        EntityManager Manager => World.DefaultGameObjectInjectionWorld.EntityManager;
         public static Action<int> QuestUpdated;
 
         void Start()
@@ -68,9 +68,9 @@ namespace QuestSystem
         {
             btn.onClick.AddListener(() => {
 
-                var event_entity = World.Active.EntityManager.CreateEntity(typeof(GameEvent));
+                var event_entity = Manager.CreateEntity(typeof(GameEvent));
 
-                World.Active.EntityManager.SetComponentData(
+                Manager.SetComponentData(
                     event_entity, 
                     new GameEvent() {
                         LocationID = location.ID,
@@ -81,21 +81,20 @@ namespace QuestSystem
         void LoadQuests()
         {
             var quests = Resources.LoadAll<QuestInfo>("Quests");
-            var world = World.Active;
 
             foreach (var quest in quests)
             {
-                var quest_entity = world.EntityManager.CreateEntity(
+                var quest_entity = Manager.CreateEntity(
                     typeof(QuestComponent),
                     typeof(QuestActiveTag));
 
-                world.EntityManager.SetComponentData(quest_entity, new QuestComponent()
+                Manager.SetComponentData(quest_entity, new QuestComponent()
                 {
                     QuestID = quest.ID
                 });
 
                 if (quest.Goals.Length > 0)
-                    AddQuestCounters(quest, quest_entity, world.EntityManager);
+                    AddQuestCounters(quest, quest_entity, Manager);
 
                 Info.Add(quest.ID, quest);
                 QuestEntities.Add(quest.ID, quest_entity);
