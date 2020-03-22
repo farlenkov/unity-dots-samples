@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,9 +18,9 @@ namespace QuestSystem
         public Color ActiveQuestColor;
         public Color CompletedQuestColor;
 
-        Dictionary<int, Text> QuestTrackers = new Dictionary<int, Text>();
-        Dictionary<int, Entity> QuestEntities = new Dictionary<int, Entity>();
-        Dictionary<int, BaseInfo> Info = new Dictionary<int, BaseInfo>();
+        readonly Dictionary<int, TextMeshProUGUI> QuestTrackers = new Dictionary<int, TextMeshProUGUI>();
+        readonly Dictionary<int, Entity> QuestEntities = new Dictionary<int, Entity>();
+        readonly Dictionary<int, BaseInfo> Info = new Dictionary<int, BaseInfo>();
 
         EntityManager Manager => World.DefaultGameObjectInjectionWorld.EntityManager;
         public static Action<int> QuestUpdated;
@@ -122,7 +123,7 @@ namespace QuestSystem
         void AddQuestTracker(QuestInfo quest)
         {
             var quest_go = Instantiate(QuestTemplate, QuestRoot);
-            var quest_text = quest_go.GetComponent<Text>();
+            var quest_text = quest_go.GetComponentInChildren<TextMeshProUGUI>();
             QuestTrackers.Add(quest.ID, quest_text);
         }
 
