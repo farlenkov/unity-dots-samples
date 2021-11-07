@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.farlenkov.ecs-fps": "file:../../unity-packages/com.unity-practice.ecs-fps",
+    "com.unity-practice.quest-system": "file:../../unity-packages/com.unity-practice.quest-system",
     "com.unity.ide.rider": "2.0.7",
     "com.unity.ide.visualstudio": "2.0.11",
     "com.unity.ide.vscode": "1.2.4",

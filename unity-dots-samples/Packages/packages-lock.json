@@ -8,6 +8,14 @@
         "com.unity.physics": "0.6.0-preview.3"
       }
     },
+    "com.unity-practice.quest-system": {
+      "version": "file:../../unity-packages/com.unity-practice.quest-system",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.entities": "0.17.0-preview.41"
+      }
+    },
     "com.unity.burst": {
       "version": "1.4.1",
       "depth": 1,

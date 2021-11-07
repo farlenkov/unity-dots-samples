@@ -1,0 +1,15 @@
+{
+  "name": "com.unity-practice.quest-system",
+  "displayName": "Unity Practice / ECS / Quest System",
+  "version": "1.0.0",
+  "unity": "2020.3",
+  "description": "Quest System with Unity ESC",
+  "dependencies": {
+    "com.unity.entities": "0.17.0-preview.41"
+  },
+  "type": "library",
+  "author": {
+    "name": "Mike Farlenkov",
+    "url": "https://farlenkov.com"
+  }
+}
