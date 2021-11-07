@@ -12,16 +12,16 @@ using Unity.Physics.Systems;
 namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
-    [UpdateAfter(typeof(PlayerInputApplySystem))]
+    [UpdateAfter(typeof(CharacterInputApplySystem))]
     [UpdateBefore(typeof(BuildPhysicsWorld))]
     public class CharacterMoveSystem : ComponentSystem
     {
-        PlayerInputSettings.SettingsData InputSettings;
+        CharacterInputSettings.SettingsData InputSettings;
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            InputSettings = PlayerInputSettings.Load();
+            InputSettings = CharacterInputSettings.Load();
         }
 
         protected override void OnUpdate()

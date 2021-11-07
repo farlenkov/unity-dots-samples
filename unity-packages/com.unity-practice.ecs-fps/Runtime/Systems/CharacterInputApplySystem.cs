@@ -8,15 +8,15 @@ using UnityEngine;
 namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
-    [UpdateAfter(typeof(PlayerInputReadSystem))]
-    public class PlayerInputApplySystem : ComponentSystem
+    [UpdateAfter(typeof(CharacterInputReadSystem))]
+    public class CharacterInputApplySystem : ComponentSystem
     {
-        PlayerInputSettings.SettingsData InputSettings;
+        CharacterInputSettings.SettingsData InputSettings;
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            InputSettings = PlayerInputSettings.Load();
+            InputSettings = CharacterInputSettings.Load();
         }
 
         protected override void OnUpdate()
@@ -28,7 +28,7 @@ namespace FirstPersonSystem
             Entities.ForEach((
                 ref CharacterMoveData move,
                 ref CharacterLookData look,
-                ref PlayerInputData input) =>
+                ref CharacterInputData input) =>
             {
                 // MOUSE
                 
@@ -49,7 +49,7 @@ namespace FirstPersonSystem
 
                     var localSpaceMovement = (forward * vertical) + (right * horizontal);
                     var worldSpaceMovement = math.rotate(quaternion.AxisAngle(up, look.LookY), localSpaceMovement);
-                    move.Velocity = worldSpaceMovement * dt;
+                    move.Velocity = math.normalize(worldSpaceMovement) * dt;
                 }
                 else
                 {

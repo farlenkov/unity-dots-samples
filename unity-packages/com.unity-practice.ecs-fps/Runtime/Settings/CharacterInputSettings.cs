@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace FirstPersonSystem
 {
-    [CreateAssetMenu(fileName = "PlayerInputSettings", menuName = "Unity Practice/PlayerInputSettings")]
-    public class PlayerInputSettings : ScriptableObject
+    [CreateAssetMenu(fileName = "CharacterInputSettings", menuName = "Unity Practice/CharacterInputSettings")]
+    public class CharacterInputSettings : ScriptableObject
     {
         public SettingsData Settings;
 
         public static SettingsData Load()
         {
-            var settings = Resources.Load<PlayerInputSettings>("PlayerInputSettings");
+            var settings = Resources.Load<CharacterInputSettings>("CharacterInputSettings");
 
             if (settings != null)
             {

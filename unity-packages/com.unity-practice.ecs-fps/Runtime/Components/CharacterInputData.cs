@@ -7,7 +7,7 @@ using UnityEngine;
 namespace FirstPersonSystem
 {
     [GenerateAuthoringComponent]
-    public struct PlayerInputData : IComponentData
+    public struct CharacterInputData : IComponentData
     {
         public float MouseX;
         public float MouseY;

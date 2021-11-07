@@ -9,19 +9,19 @@ using UnityEngine;
 namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
-    public class PlayerInputReadSystem : ComponentSystem
+    public class CharacterInputReadSystem : ComponentSystem
     {
-        PlayerInputSettings.SettingsData InputSettings;
+        CharacterInputSettings.SettingsData InputSettings;
 
         protected override void OnCreate()
         {
             base.OnCreate();
-            InputSettings = PlayerInputSettings.Load();
+            InputSettings = CharacterInputSettings.Load();
         }
 
         protected override void OnUpdate()
         {
-            Entities.ForEach((ref PlayerInputData input) =>
+            Entities.ForEach((ref CharacterInputData input) =>
             {
                 input.MouseX = Input.GetAxisRaw("Mouse X") * InputSettings.MouseSensitivity;
                 input.MouseY = Input.GetAxisRaw("Mouse Y") * InputSettings.MouseSensitivity;

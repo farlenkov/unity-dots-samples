@@ -20,7 +20,7 @@ namespace FirstPersonSystem
             Entities.ForEach((
                 ref Rotation rotation,
                 ref PhysicsVelocity velocity,
-                ref PlayerInputData input) =>
+                ref CharacterInputData input) =>
             {
                 rotation.Value = quaternion.identity;
                 velocity.Angular = float3.zero;

@@ -459,7 +459,7 @@ MonoBehaviour:
   m_MotionType: 0
   m_Smoothing: 0
   m_Mass: 1
-  m_LinearDamping: 9
+  m_LinearDamping: 7
   m_AngularDamping: 0.1
   m_InitialLinearVelocity:
     x: 0

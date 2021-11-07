@@ -12,7 +12,7 @@ using Unity.Physics.Systems;
 namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
-    [UpdateAfter(typeof(PlayerInputApplySystem))]
+    [UpdateAfter(typeof(CharacterInputApplySystem))]
     [UpdateBefore(typeof(BuildPhysicsWorld))]
     public class CharacterLookSystem : ComponentSystem
     {

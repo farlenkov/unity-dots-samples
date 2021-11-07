@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df3d3bfe380521247a37c706029bd5db, type: 3}
-  m_Name: PlayerInputSettings
+  m_Name: CharacterInputSettings
   m_EditorClassIdentifier: 
   Settings:
     MouseSensitivity: 10
     Acceleration: 100
     MaxSpeed: 3
-    JumpForce: 15
+    JumpForce: 17
     VerticalLookMinMax:
       x: -0.97
       y: 0.97
