@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings:
     MouseSensitivity: 10
-    Acceleration: 100
+    Acceleration: 70
     MaxSpeed: 3
     JumpForce: 17
     VerticalLookMinMax:
