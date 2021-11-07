@@ -9,7 +9,7 @@ namespace FirstPersonSystem
     [GenerateAuthoringComponent]
     public struct CharacterMoveData : IComponentData
     {
-        public float Speed;
+        public float3 Up;
         public float3 Velocity;
     }
 }

@@ -11,6 +11,6 @@ namespace FirstPersonSystem
     {
         public float LookY;
         public float LookX;
-        public float3 LookForward;
+        public Entity Camera;
     }
 }

@@ -12,19 +12,19 @@ using Unity.Physics.Systems;
 namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
-    [UpdateAfter(typeof(PlayerInputApplySystem))]
-    [UpdateBefore(typeof(BuildPhysicsWorld))]
-    public class CharacterMoveSystem : ComponentSystem
+    [UpdateAfter(typeof(ExportPhysicsWorld))]
+    public class ResetRotationSystem : ComponentSystem
     {
         protected override void OnUpdate()
         {
             Entities.ForEach((
-                ref PhysicsVelocity vel,
-                ref CharacterMoveData move,
-                ref PlayerInputSettings settings) =>
+                ref Rotation rotation,
+                ref PhysicsVelocity velocity,
+                ref PlayerInputData input) =>
             {
-                vel.Linear.xz += move.Velocity.xz * settings.Acceleration;               
-                vel.Linear.y += move.Velocity.y;
+                rotation.Value = quaternion.identity;
+                velocity.Angular = float3.zero;
+                
             });
         }
     }

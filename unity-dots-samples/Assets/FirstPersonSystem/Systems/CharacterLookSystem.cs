@@ -14,17 +14,17 @@ namespace FirstPersonSystem
     [AlwaysSynchronizeSystem]
     [UpdateAfter(typeof(PlayerInputApplySystem))]
     [UpdateBefore(typeof(BuildPhysicsWorld))]
-    public class CharacterMoveSystem : ComponentSystem
+    public class CharacterLookSystem : ComponentSystem
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((
-                ref PhysicsVelocity vel,
-                ref CharacterMoveData move,
-                ref PlayerInputSettings settings) =>
+            var mng = EntityManager;
+            
+            Entities.ForEach((ref CharacterLookData look) =>
             {
-                vel.Linear.xz += move.Velocity.xz * settings.Acceleration;               
-                vel.Linear.y += move.Velocity.y;
+                var cam_rot = mng.GetComponentData<Rotation>(look.Camera);
+                cam_rot.Value = quaternion.Euler(look.LookX, look.LookY, 0f);
+                mng.SetComponentData(look.Camera, cam_rot);
             });
         }
     }

@@ -10,6 +10,9 @@ namespace FirstPersonSystem
     public struct PlayerInputSettings : IComponentData
     {
         public float MouseSensitivity;
+        public float Acceleration;
+        public float MaxSpeed;
+        public float JumpForce;
         public float2 VerticalLookMinMax;
     }
 }

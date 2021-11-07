@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
-    public class PlayerInputReadSystem : JobComponentSystem
+    public class PlayerInputReadSystem : ComponentSystem
     {
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
+        protected override void OnUpdate()
         {
             Entities.ForEach((
                 ref PlayerInputData input,
-                in PlayerInputSettings settings) =>
+                ref PlayerInputSettings settings) =>
             {
                 input.MouseX = Input.GetAxisRaw("Mouse X") * settings.MouseSensitivity;
                 input.MouseY = Input.GetAxisRaw("Mouse Y") * settings.MouseSensitivity;
                 input.Horizontal = Input.GetAxisRaw("Horizontal");
                 input.Vertical = Input.GetAxisRaw("Vertical");
-                
-            }).Run();
+                input.IsJump = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
 
-            return default;
+            });
         }
     }
 }

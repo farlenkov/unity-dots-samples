@@ -13,5 +13,6 @@ namespace FirstPersonSystem
         public float MouseY;
         public float Horizontal;
         public float Vertical;
+        public int IsJump;
     }
 }

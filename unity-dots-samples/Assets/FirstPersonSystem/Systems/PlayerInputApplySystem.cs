@@ -9,43 +9,49 @@ namespace FirstPersonSystem
 {
     [AlwaysSynchronizeSystem]
     [UpdateAfter(typeof(PlayerInputReadSystem))]
-    public class PlayerInputApplySystem : JobComponentSystem
+    public class PlayerInputApplySystem : ComponentSystem
     {
-        protected override JobHandle OnUpdate(JobHandle inputDeps)
-        { 
+        protected override void OnUpdate()
+        {
+            var time = Time.ElapsedTime;
             var dt = Time.DeltaTime;
+            var up = math.up();
             
             Entities.ForEach((
-                ref CharacterMoveData move, 
-                ref CharacterLookData look, 
-                in PlayerInputData input, 
-                in PlayerInputSettings settings) =>
+                ref CharacterMoveData move,
+                ref CharacterLookData look,
+                ref PlayerInputData input,
+                ref PlayerInputSettings settings) =>
             {
-                look.LookX = math.clamp(look.LookX + input.MouseX * dt, settings.VerticalLookMinMax.x, settings.VerticalLookMinMax.y) ;
-                look.LookY += input.MouseY * dt;
-                look.LookForward = new float3(look.LookY, look.LookX, 0f);
+                // MOUSE
                 
-                var up = math.up();
+                look.LookY += input.MouseX * dt;
+                look.LookX -= input.MouseY * dt;
+                look.LookX = math.clamp(look.LookX, settings.VerticalLookMinMax.x, settings.VerticalLookMinMax.y);
+                
+                // KEYS
+                
                 var horizontal = input.Horizontal;
                 var vertical = input.Vertical;
-                var forward = math.forward(quaternion.identity);
-                var right = math.cross(up, forward);
                 var haveInput = (math.abs(horizontal) > float.Epsilon) || (math.abs(vertical) > float.Epsilon);
-                
+
                 if (haveInput)
                 {
-                    var localSpaceMovement = forward * vertical + right * horizontal;
+                    var forward = math.forward(quaternion.identity);
+                    var right = math.cross(up, forward);
+
+                    var localSpaceMovement = (forward * vertical) + (right * horizontal);
                     var worldSpaceMovement = math.rotate(quaternion.AxisAngle(up, look.LookY), localSpaceMovement);
-                    move.Velocity = math.normalize(worldSpaceMovement) * dt;
+                    move.Velocity = worldSpaceMovement * dt;
                 }
                 else
                 {
                     move.Velocity = float3.zero;
                 }
-                
-            }).Run();
-        
-            return default;
+
+                if (input.IsJump == 1)
+                    move.Velocity += up * settings.JumpForce;
+            });
         }
     }
 }
