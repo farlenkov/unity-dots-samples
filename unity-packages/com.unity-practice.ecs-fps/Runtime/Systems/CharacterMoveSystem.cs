@@ -16,14 +16,21 @@ namespace FirstPersonSystem
     [UpdateBefore(typeof(BuildPhysicsWorld))]
     public class CharacterMoveSystem : ComponentSystem
     {
+        PlayerInputSettings.SettingsData InputSettings;
+
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            InputSettings = PlayerInputSettings.Load();
+        }
+
         protected override void OnUpdate()
         {
             Entities.ForEach((
                 ref PhysicsVelocity vel,
-                ref CharacterMoveData move,
-                ref PlayerInputSettings settings) =>
+                ref CharacterMoveData move) =>
             {
-                vel.Linear.xz += move.Velocity.xz * settings.Acceleration;               
+                vel.Linear.xz += move.Velocity.xz * InputSettings.Acceleration;               
                 vel.Linear.y += move.Velocity.y;
             });
         }

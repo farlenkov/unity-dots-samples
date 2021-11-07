@@ -1,0 +1,15 @@
+{
+  "name": "com.farlenkov.ecs-fps",
+  "displayName": "Unity Practice / ECS / FPS Controller",
+  "version": "1.0.0",
+  "unity": "2020.3",
+  "description": "FPS Controller with Unity ESC",
+  "dependencies": {
+	"com.unity.physics": "0.6.0-preview.3"
+  },
+  "type": "library",
+  "author": {
+    "name": "Mike Farlenkov",
+    "url": "https://farlenkov.com"
+  }
+}

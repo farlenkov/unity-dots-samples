@@ -11,18 +11,23 @@ namespace FirstPersonSystem
     [AlwaysSynchronizeSystem]
     public class PlayerInputReadSystem : ComponentSystem
     {
+        PlayerInputSettings.SettingsData InputSettings;
+
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            InputSettings = PlayerInputSettings.Load();
+        }
+
         protected override void OnUpdate()
         {
-            Entities.ForEach((
-                ref PlayerInputData input,
-                ref PlayerInputSettings settings) =>
+            Entities.ForEach((ref PlayerInputData input) =>
             {
-                input.MouseX = Input.GetAxisRaw("Mouse X") * settings.MouseSensitivity;
-                input.MouseY = Input.GetAxisRaw("Mouse Y") * settings.MouseSensitivity;
+                input.MouseX = Input.GetAxisRaw("Mouse X") * InputSettings.MouseSensitivity;
+                input.MouseY = Input.GetAxisRaw("Mouse Y") * InputSettings.MouseSensitivity;
                 input.Horizontal = Input.GetAxisRaw("Horizontal");
                 input.Vertical = Input.GetAxisRaw("Vertical");
                 input.IsJump = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
-
             });
         }
     }

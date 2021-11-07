@@ -11,6 +11,14 @@ namespace FirstPersonSystem
     [UpdateAfter(typeof(PlayerInputReadSystem))]
     public class PlayerInputApplySystem : ComponentSystem
     {
+        PlayerInputSettings.SettingsData InputSettings;
+
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            InputSettings = PlayerInputSettings.Load();
+        }
+
         protected override void OnUpdate()
         {
             var time = Time.ElapsedTime;
@@ -20,14 +28,13 @@ namespace FirstPersonSystem
             Entities.ForEach((
                 ref CharacterMoveData move,
                 ref CharacterLookData look,
-                ref PlayerInputData input,
-                ref PlayerInputSettings settings) =>
+                ref PlayerInputData input) =>
             {
                 // MOUSE
                 
                 look.LookY += input.MouseX * dt;
                 look.LookX -= input.MouseY * dt;
-                look.LookX = math.clamp(look.LookX, settings.VerticalLookMinMax.x, settings.VerticalLookMinMax.y);
+                look.LookX = math.clamp(look.LookX, InputSettings.VerticalLookMinMax.x, InputSettings.VerticalLookMinMax.y);
                 
                 // KEYS
                 
@@ -50,7 +57,7 @@ namespace FirstPersonSystem
                 }
 
                 if (input.IsJump == 1)
-                    move.Velocity += up * settings.JumpForce;
+                    move.Velocity += up * InputSettings.JumpForce;
             });
         }
     }

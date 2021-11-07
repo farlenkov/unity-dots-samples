@@ -1,5 +1,13 @@
 {
   "dependencies": {
+    "com.farlenkov.ecs-fps": {
+      "version": "file:../../unity-packages/com.unity-practice.ecs-fps",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.physics": "0.6.0-preview.3"
+      }
+    },
     "com.unity.burst": {
       "version": "1.4.1",
       "depth": 1,
